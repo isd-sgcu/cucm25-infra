@@ -2,6 +2,7 @@
 set -e
 
 echo "Starting update process..."
+git reset --hard
 git pull origin main
 
 echo "Pulling latest Docker images..."

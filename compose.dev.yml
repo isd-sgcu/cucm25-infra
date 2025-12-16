@@ -7,7 +7,7 @@ services:
     env_file:
       - ./.env.dev
   backend:
-    image: ghcr.io/isd-sgcu/cucm25-backend:dev
+    image: ghcr.io/isd-sgcu/cucm25-backend@sha256:25ba61ffc4ce818faf94caa7cc7bca383d69aee43c25196acb35aac70f1c9474
     restart: always
     depends_on:
       - database

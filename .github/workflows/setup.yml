@@ -1,0 +1,27 @@
+name: Setup CI/CD Environment
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Initial Setup via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd ~
+
+            git clone ${{ github.repositoryUrl }} app
+            cd app
+            
+            chmod +x scripts/deploy.sh
+            ./scripts/deploy.sh
+            exit
+          EOF

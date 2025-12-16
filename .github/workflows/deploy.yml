@@ -1,0 +1,36 @@
+name: Deploy services
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: [ prod, dev ]
+
+    steps:
+      - name: Setup SSH agent
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deployment via SSH
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd ~
+
+            git reset --hard
+            git pull origin main
+
+            docker-compose -f compose.${{ matrix.environment }}.yml pull
+
+            docker-compose -f compose.${{ matrix.environment }}.yml up -d --build
+
+            docker image prune -f
+
+            exit
+          EOF

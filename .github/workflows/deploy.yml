@@ -22,7 +22,7 @@ jobs:
       - name: Deployment via SSH
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
-            cd ~
+            cd ~/cucm25-infra
 
             git reset --hard
             git pull origin main

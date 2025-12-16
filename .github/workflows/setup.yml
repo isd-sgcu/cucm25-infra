@@ -18,8 +18,8 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
             cd ~
 
-            git clone ${{ github.repositoryUrl }} app
-            cd app
+            git clone https://github.com/isd-sgcu/cucm25-infra.git 
+            cd cucm25-infra
             
             chmod +x scripts/deploy.sh
             ./scripts/deploy.sh

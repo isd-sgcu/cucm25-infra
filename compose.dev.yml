@@ -15,6 +15,10 @@ services:
       - "8084:8080"
     env_file:
       - ./.env.dev
+    command: >
+      sh -c "
+      npx prisma migrate deploy &&
+      npm run start"
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
       interval: 30s

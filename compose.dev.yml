@@ -1,7 +1,7 @@
 name: cucm25-coins-dev
 services:
   frontend:
-    image: ghcr.io/isd-sgcu/cucm25-frontend:dev
+    image: ghcr.io/isd-sgcu/cucm25-frontend@sha256:47dc9a3fd6eef9ce46b670c2df94fa98c7da4439535edec6170f869997c9a8de
     ports:
       - "8083:80"
     env_file:

@@ -16,7 +16,7 @@ for site in nginx/sites-available/*; do
 done
 
 echo "Testing and reloading NGINX..."
-sudo nginx -t && sudo systemctl reload nginx
+sudo nginx -t && sudo nginx -s reload
 
 echo "Setting up SSL certificates with Certbot..."
 EMAIL="abuse@isd.sgcu.in.th"

@@ -19,7 +19,7 @@ echo "Testing and reloading NGINX..."
 sudo nginx -t && sudo systemctl reload nginx
 
 echo "Setting up SSL certificates with Certbot..."
-sudo certbot --nginx \
+sudo certbot --nginx --expand\
   --non-interactive --agree-tos \
   --email "abuse@isd.sgcu.in.th" \
   $(printf -- "-d %s " "${DOMAINS[@]}")

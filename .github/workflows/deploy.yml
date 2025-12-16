@@ -30,7 +30,7 @@ jobs:
 
             docker compose -f compose.${{ matrix.environment }}.yml pull
 
-            docker compose -f compose.${{ matrix.environment }}.yml up -d --build
+            docker compose -f compose.${{ matrix.environment }}.yml up -d
 
             docker image prune -f
 

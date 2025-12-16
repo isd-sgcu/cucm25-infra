@@ -1,0 +1,45 @@
+name: cucm25-coins-dev
+services:
+  frontend:
+    image: ghcr.io/isd-sgcu/cucm25-frontend:dev
+    ports:
+      - "8083:80"
+    env_file:
+      - ./.env.dev
+  backend:
+    image: ghcr.io/isd-sgcu/cucm25-backend:dev
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - "8084:8080"
+    env_file:
+      - ./.env.dev
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - backend-network
+  database:
+    image: postgres:17
+    restart: always
+    env_file:
+      - ./.env.dev
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend-network
+
+volumes:
+  db-data:
+
+networks:
+  backend-network:
+    driver: bridge

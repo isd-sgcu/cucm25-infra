@@ -20,6 +20,9 @@ jobs:
 
             git clone https://github.com/isd-sgcu/cucm25-infra.git 
             cd cucm25-infra
+
+            git reset --hard
+            git pull origin main
             
             chmod +x scripts/deploy.sh
             ./scripts/deploy.sh

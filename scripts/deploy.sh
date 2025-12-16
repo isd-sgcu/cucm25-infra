@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 DOMAIN=("coin.cucm25.me" "dev-coin.cucm25.me")
 

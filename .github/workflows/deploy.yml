@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
-    if: github.actor == 'isd-infra[bot]' || github.actor == 'isd-sgcu'
+    if: github.actor == 'isd-infra[bot]' || github.actor == 'isd-sgcu' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     strategy:
       matrix:

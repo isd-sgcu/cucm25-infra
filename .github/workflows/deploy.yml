@@ -28,9 +28,9 @@ jobs:
             git reset --hard
             git pull origin main
 
-            docker-compose -f compose.${{ matrix.environment }}.yml pull
+            docker compose -f compose.${{ matrix.environment }}.yml pull
 
-            docker-compose -f compose.${{ matrix.environment }}.yml up -d --build
+            docker compose -f compose.${{ matrix.environment }}.yml up -d --build
 
             docker image prune -f
 

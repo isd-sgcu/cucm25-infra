@@ -7,7 +7,7 @@ services:
     env_file:
       - ./.env.dev
   backend:
-    image: $FULL_IMAGE
+    image: ghcr.io/isd-sgcu/cucm25-backend:dev
     restart: always
     depends_on:
       - database

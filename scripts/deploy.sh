@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DOMAIN=("coin.cucm25.me" "dev-coin.cucm25.me")
+DOMAINS=( 
+  "coin.cucm25.me"
+  "dev-coin.cucm25.me"
+)
 
 echo "Deploying NGINX configuration files..."
 sudo cp -r nginx/* /etc/nginx/
@@ -19,6 +22,6 @@ echo "Setting up SSL certificates with Certbot..."
 sudo certbot --nginx \
   --non-interactive --agree-tos \
   --email "abuse@isd.sgcu.in.th" \
-  ${printf -- "-d %s " "${DOMAIN[@]}"}
+  $(printf -- "-d %s " "${DOMAINS[@]}")
 
 echo "Deployment complete."
